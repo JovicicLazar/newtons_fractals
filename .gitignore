@@ -39,3 +39,10 @@
 
 # debug information files
 *.dwo
+
+#vscode
+.vscode
+
+#images
+*.ppm
+*.bmp
