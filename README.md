@@ -67,4 +67,4 @@ To clean up build files:
 make clean
 ```
 
-![Newton Fractal Example](images/newtons_fracal_n5_.bmp)
+![Newton Fractal Example](images/newtons_fracal_n5.png)
