@@ -2,17 +2,22 @@
 #include <fstream>
 #include <iostream>
 
-void ImageWriter::saveBMP(const std::string &filename, const std::vector<uint8_t> &image, int width, int height)
+void ImageWriter::saveBMP(const Image &image)
 {
-    std::ofstream file(filename, std::ios::binary);
+    std::string file_name = image.file_name;
+    int image_width = image.width;
+    int image_height = image.height;
+    const auto& image_data = image.image_data;
+
+    std::ofstream file(file_name, std::ios::binary);
     if (!file)
     {
-        std::cerr << "Failed to open " << filename << " for writing.\n";
+        std::cerr << "Failed to open " << file_name << " for writing.\n";
         return;
     }
 
-    int rowSize = (3 * width + 3) & (~3);
-    int dataSize = rowSize * height;
+    int rowSize = (3 * image_width + 3) & (~3);
+    int dataSize = rowSize * image_height;
     int fileSize = 54 + dataSize;
 
     // BMP Header
@@ -40,24 +45,24 @@ void ImageWriter::saveBMP(const std::string &filename, const std::vector<uint8_t
     header[5] = fileSize >> 24;
 
     // Width
-    header[18] = width;
-    header[19] = width >> 8;
-    header[20] = width >> 16;
-    header[21] = width >> 24;
+    header[18] = image_width;
+    header[19] = image_width >> 8;
+    header[20] = image_width >> 16;
+    header[21] = image_width >> 24;
 
     // Height
-    header[22] = height;
-    header[23] = height >> 8;
-    header[24] = height >> 16;
-    header[25] = height >> 24;
+    header[22] = image_height;
+    header[23] = image_height >> 8;
+    header[24] = image_height >> 16;
+    header[25] = image_height >> 24;
 
     file.write(reinterpret_cast<char *>(header), 54);
 
-    std::vector<uint8_t> padding(rowSize - width * 3, 0);
+    std::vector<uint8_t> padding(rowSize - image_width * 3, 0);
 
-    for (int y = height - 1; y >= 0; --y)
+    for (int y = image_height - 1; y >= 0; --y)
     {
-        file.write(reinterpret_cast<const char *>(&image[y * width * 3]), width * 3);
+        file.write(reinterpret_cast<const char *>(&image_data[y * image_width * 3]), image_width * 3);
         file.write(reinterpret_cast<const char *>(padding.data()), padding.size());
     }
 

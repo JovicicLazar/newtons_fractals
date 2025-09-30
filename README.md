@@ -50,10 +50,14 @@ make
 Then run the program with:
 
 ```bash
-./newton_fractal <n>
+./newton_fractal -n 5
+
+./newton_fractal -n 4 -width 4000 -height 4000 -iter 100
+
+./newton_fractal -n 3 -width 5000 -height 5000 -iter 200
+
+./newton_fractal -h
 ```
-
-
 
 ## Clean
 
@@ -62,3 +66,5 @@ To clean up build files:
 ```bash
 make clean
 ```
+
+![Newton Fractal Example](images/newtons_fracal_n5_.bmp)

@@ -3,13 +3,13 @@
 
 #include <vector>
 #include <cstdint>
+#include "types.hpp"
 
 class Renderer
 {
 public:
-    static void renderFractal(const int width, const int height, const int degree, const int maxIter,
-                              const double xmin, const double xmax, const double ymin, const double ymax,
-                              std::vector<uint8_t> &image);
+    static void renderFractal(Image &image, const int degree, const int maxIter,
+                              const double xmin, const double xmax, const double ymin, const double ymax);
 };
 
 #endif // RENDERER_HPP

@@ -66,6 +66,7 @@ export void render(
             
             varying int iter = 0;
             
+            // Newton calculation
             for (uniform int step = 0; step < maxIter; step++) {
                 double r2 = zr*zr + zi*zi;
                 double r = sqrt(r2);

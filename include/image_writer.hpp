@@ -4,10 +4,11 @@
 #include <vector>
 #include <cstdint>
 #include <string>
+#include "types.hpp"
 
 class ImageWriter {
     public:
-        static void saveBMP(const std::string& filename, const std::vector<uint8_t>& image, int width, int height);
+        static void saveBMP(const Image& image);
 };
 
 
